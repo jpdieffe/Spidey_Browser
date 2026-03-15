@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Swinger</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+  <div id="ui-overlay">
+    <div id="hud" class="hidden">
+      <div id="hud-left">
+        <span id="level-display">Level 1</span>
+      </div>
+      <div id="hud-right">
+        <div id="inventory"></div>
+      </div>
+    </div>
+    <div id="menu-screen">
+      <div id="menu-content">
+        <img src="assets/spiderman.png" id="menu-logo" alt="Web Swinger" />
+        <h1>WEB SWINGER</h1>
+        <div id="level-select">
+          <h2>Select Level</h2>
+          <div id="level-buttons"></div>
+        </div>
+        <div id="menu-controls">
+          <p>WASD / Arrow Keys: Move &amp; Jump</p>
+          <p>Left Click: Shoot Web (aim at cursor)</p>
+          <p>Right Click: Release Web</p>
+          <p>S / Down (on ceiling): Drop down</p>
+          <p>W / Up (on web): Climb up &nbsp; S / Down: Climb down</p>
+        </div>
+      </div>
+    </div>
+    <div id="level-complete" class="hidden">
+      <h1>LEVEL COMPLETE!</h1>
+      <p id="stars-earned"></p>
+    </div>
+    <div id="game-over" class="hidden">
+      <h1>YOU DIED</h1>
+      <button id="retry-btn">RETRY</button>
+      <button id="menu-btn">MENU</button>
+    </div>
+    <div id="store-screen" class="hidden">
+      <h1>STORE</h1>
+      <div id="store-items"></div>
+      <p id="store-stars">Stars: 0</p>
+      <button id="store-close">Close</button>
+    </div>
+  </div>
+  <script src="js/Vec2.js"></script>
+  <script src="js/constants.js"></script>
+  <script src="js/assets.js"></script>
+  <script src="js/Platform.js"></script>
+  <script src="js/WebLine.js"></script>
+  <script src="js/Player.js"></script>
+  <script src="js/enemies.js"></script>
+  <script src="js/objects.js"></script>
+  <script src="js/weapons.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/Game.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

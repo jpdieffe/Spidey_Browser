@@ -42,6 +42,9 @@ class Game {
 
     this._resize();
     window.addEventListener('resize', () => this._resize());
+
+    // Canvas should not capture pointer events while menu is showing
+    this.canvas.style.pointerEvents = 'none';
   }
 
   _resize() {
@@ -172,6 +175,7 @@ class Game {
     this.levelCompleteTimer = 0; this.levelCompleteEarned = false;
     this.deathTimer = 0;
     this.state = GSTATE.PLAYING;
+    this.canvas.style.pointerEvents = 'auto';
     document.getElementById('hud').classList.remove('hidden');
     document.getElementById('level-complete').classList.add('hidden');
     document.getElementById('game-over').classList.add('hidden');
@@ -181,6 +185,7 @@ class Game {
 
   returnToMenu() {
     this.state = GSTATE.MENU;
+    this.canvas.style.pointerEvents = 'none';
     document.getElementById('hud').classList.add('hidden');
     document.getElementById('level-complete').classList.add('hidden');
     document.getElementById('game-over').classList.add('hidden');

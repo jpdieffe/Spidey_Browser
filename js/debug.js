@@ -15,6 +15,11 @@ const DebugPanel = {
   init() {
     const panel = document.getElementById('debug-panel');
 
+    // Prevent debug-panel clicks from reaching the canvas
+    panel.addEventListener('mousedown', e => e.stopPropagation());
+    panel.addEventListener('mouseup',   e => e.stopPropagation());
+    panel.addEventListener('click',     e => e.stopPropagation());
+
     // Tilde toggles panel
     window.addEventListener('keydown', e => {
       if (e.code === 'Backquote') {

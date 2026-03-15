@@ -17,7 +17,7 @@ class Game {
     this.camX = 0; this.camY = 0;
 
     // Zoom — scale canvas rendering so the world appears zoomed out
-    this.ZOOM = 0.7;
+    this.ZOOM = 0.35;
 
     // Input
     this.keys = {};

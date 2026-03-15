@@ -1,5 +1,5 @@
 // Game-wide constants matching Android original
-const VERSION = 'v1.6';
+const VERSION = 'v1.7';
 
 const C = {
   GRAVITY:         2200,
@@ -14,8 +14,8 @@ const C = {
   ROPE_MIN:          80,
   ROPE_MAX:        1200,
   CLIMB_SPEED:      400,
-  SWING_PUMP:       3.5,
-  SWING_DAMP:     0.995,
+  SWING_PUMP:       8.0,
+  SWING_DAMP:     0.999,
 
   JET_SPEED:        800,
   JET_DURATION:       5,

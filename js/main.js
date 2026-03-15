@@ -20,6 +20,7 @@ function gameLoop(timestamp) {
 
 Assets.onReady = function () {
   document.getElementById('version-label').textContent = VERSION;
+  DebugPanel.init();
   const canvas = document.getElementById('gameCanvas');
   game = new Game(canvas);
   game._buildMenu();

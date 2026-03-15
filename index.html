@@ -50,6 +50,29 @@
       <button id="store-close">Close</button>
     </div>
     <div id="version-label"></div>
+
+    <div id="debug-panel">
+      <div id="debug-title">⚙ Debug  <span id="debug-hint">[ ~ to close ]</span></div>
+      <label>Swing Pump <span id="val-pump"></span>
+        <input type="range" id="dbg-pump" min="1" max="30" step="0.5" />
+      </label>
+      <label>Swing Damp <span id="val-damp"></span>
+        <input type="range" id="dbg-damp" min="0.980" max="1.000" step="0.001" />
+      </label>
+      <label>Gravity <span id="val-gravity"></span>
+        <input type="range" id="dbg-gravity" min="500" max="5000" step="100" />
+      </label>
+      <label>Move Speed <span id="val-move"></span>
+        <input type="range" id="dbg-move" min="100" max="1500" step="50" />
+      </label>
+      <label>Jump Vel <span id="val-jump"></span>
+        <input type="range" id="dbg-jump" min="-3000" max="-200" step="50" />
+      </label>
+      <label>Web Speed <span id="val-webspeed"></span>
+        <input type="range" id="dbg-webspeed" min="500" max="8000" step="100" />
+      </label>
+      <button id="dbg-reset">Reset Defaults</button>
+    </div>
   </div>
   <script src="js/Vec2.js"></script>
   <script src="js/constants.js"></script>
@@ -62,6 +85,7 @@
   <script src="js/weapons.js"></script>
   <script src="js/levels.js"></script>
   <script src="js/Game.js"></script>
+  <script src="js/debug.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

@@ -192,6 +192,60 @@ body {
 }
 #store-screen.hidden { display: none; pointer-events: none; }
 
+/* Debug panel */
+#debug-panel {
+  display: none;
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10,10,24,0.97);
+  border: 1px solid #446;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding: 12px 20px 16px;
+  min-width: 340px;
+  z-index: 10000;
+  pointer-events: all;
+  color: #ccd;
+  font-size: 13px;
+  font-family: 'Courier New', monospace;
+}
+#debug-panel.open { display: block; }
+#debug-title {
+  font-size: 15px;
+  font-weight: bold;
+  color: #88aaff;
+  margin-bottom: 10px;
+}
+#debug-hint { font-size: 11px; color: #556; }
+#debug-panel label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+#debug-panel input[type=range] {
+  flex: 1;
+  accent-color: #5588ff;
+}
+#debug-panel span[id^="val-"] {
+  min-width: 52px;
+  text-align: right;
+  color: #ffdd88;
+}
+#dbg-reset {
+  margin-top: 8px;
+  padding: 5px 16px;
+  background: #334;
+  color: #ccd;
+  border: 1px solid #446;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+}
+#dbg-reset:hover { background: #445; }
+
 /* Version label */
 #version-label {
   position: absolute;

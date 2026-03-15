@@ -1,4 +1,6 @@
 // Game-wide constants matching Android original
+const VERSION = 'v1.5';
+
 const C = {
   GRAVITY:         2200,
   MOVE_SPEED:       600,

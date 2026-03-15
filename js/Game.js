@@ -16,6 +16,9 @@ class Game {
     // Camera
     this.camX = 0; this.camY = 0;
 
+    // Zoom — scale canvas rendering so the world appears zoomed out
+    this.ZOOM = 0.7;
+
     // Input
     this.keys = {};
     this.mouseX = 0; this.mouseY = 0;
@@ -46,6 +49,9 @@ class Game {
     this.canvas.height = window.innerHeight;
     this.screenW = this.canvas.width;
     this.screenH = this.canvas.height;
+    // Virtual game dimensions (world is built in these coords, then scaled down by ZOOM)
+    this.vW = this.screenW / this.ZOOM;
+    this.vH = this.screenH / this.ZOOM;
   }
 
   _setupInput() {
@@ -85,8 +91,8 @@ class Game {
   _onLeftClick() {
     if (this.state !== GSTATE.PLAYING || !this.player || !this.player.alive) return;
     const p = this.player;
-    const worldMX = this.mouseX + this.camX;
-    const worldMY = this.mouseY + this.camY;
+    const worldMX = this.mouseX / this.ZOOM + this.camX;
+    const worldMY = this.mouseY / this.ZOOM + this.camY;
 
     // Check active weapon for special fire modes
     const activeW = p.getActiveWeapon();
@@ -155,9 +161,9 @@ class Game {
 
   startLevel(n) {
     this.currentLevel = n;
-    this.levelData = buildLevel(n, this.screenW, this.screenH);
+    this.levelData = buildLevel(n, this.vW, this.vH);
     const ld = this.levelData;
-    const floorY = this.screenH - 24;
+    const floorY = this.vH - 24;
     this.player = new Player(100, floorY - C.PLAYER_H - 10);
     this.player.spawnX = 100;
     this.player.spawnY = floorY - C.PLAYER_H - 10;
@@ -222,9 +228,9 @@ class Game {
     p.climbInput = (down ? 1 : 0) - (up ? 1 : 0);
     p.jumpPressed = up || this.keys['Space'];
 
-    // World mouse
-    const worldMX = this.mouseX + this.camX;
-    const worldMY = this.mouseY + this.camY;
+    // World mouse (divide by ZOOM to convert screen px → virtual world px)
+    const worldMX = this.mouseX / this.ZOOM + this.camX;
+    const worldMY = this.mouseY / this.ZOOM + this.camY;
 
     // Build dynamic platform list (includes cryo-frozen enemies as platforms)
     const allPlatforms = [...ld.platforms];
@@ -326,7 +332,7 @@ class Game {
     }
 
     // Update enemies
-    const floorY = this.screenH - 24;
+    const floorY = this.vH - 24;
     for (const e of ld.enemies) {
       if (!e.alive) continue;
       if (e instanceof CeilingCrawler) e.update(dt);
@@ -387,13 +393,12 @@ class Game {
       if (rectsOverlap(p.x, p.y, p.w, p.h, k.x, k.y, k.w, k.h)) k.collected = true;
     }
 
-    // Open gates
+    // Open gates — player walks into gate while carrying matching key
     for (const g of ld.gates) {
       if (g.open) continue;
       const hasKey = ld.keys.some(k => k.collected && k.color === g.color);
-      if (hasKey) {
-        const dist = Math.sqrt((p.cx - (g.x+g.w/2))**2 + (p.cy - (g.y+g.h/2))**2);
-        if (dist < 40) g.open = true;
+      if (hasKey && rectsOverlap(p.x - 30, p.y, p.w + 60, p.h, g.x, g.y, g.w, g.h)) {
+        g.open = true;
       }
     }
 
@@ -467,7 +472,7 @@ class Game {
     }
 
     // Death
-    if (!p.alive || p.y > this.screenH + 200) {
+    if (!p.alive || p.y > this.vH + 200) {
       p.alive = false;
       this.deathTimer += dt;
       if (this.deathTimer > 1.2) {
@@ -476,14 +481,11 @@ class Game {
       }
     }
 
-    // Camera — smooth follow
-    const targetX = p.cx - this.screenW * 0.35;
-    const targetY = p.cy - this.screenH * 0.5;
-    this.camX += (targetX - this.camX) * Math.min(1, dt * 0.08 * 60);
-    this.camY += (targetY - this.camY) * Math.min(1, dt * 0.08 * 60);
-    // Clamp camera
-    this.camX = Math.max(0, Math.min(ld.worldWidth - this.screenW, this.camX));
-    this.camY = Math.max(0, Math.min(this.screenH * 0.2, Math.max(-this.screenH * 0.2, this.camY)));
+    // Camera — smooth horizontal follow; world height = vH so no vertical scroll
+    const targetX = p.cx - this.vW * 0.35;
+    this.camX += (targetX - this.camX) * Math.min(1, dt * 5);
+    this.camX = Math.max(0, Math.min(ld.worldWidth - this.vW, this.camX));
+    this.camY = 0;
 
     // Update inventory HUD
     this._updateHUD();
@@ -519,28 +521,33 @@ class Game {
     const ld = this.levelData;
     if (!ld) return;
 
-    // Sky background
+    // Sky background (full canvas)
     const grad = ctx.createLinearGradient(0, 0, 0, H);
     grad.addColorStop(0, '#0a0a18');
     grad.addColorStop(1, '#18182A');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, W, H);
 
-    // Draw stars in bg
+    // Stars (screen space, parallax)
     ctx.fillStyle = 'rgba(255,255,255,0.5)';
     for (let i = 0; i < 80; i++) {
       const sx = ((i * 137.5 + this.camX * 0.05) % W + W) % W;
-      const sy = ((i * 91.3 + this.camY * 0.02) % H + H) % H;
+      const sy = ((i * 91.3) % H + H) % H;
       ctx.fillRect(sx, sy, 1.5, 1.5);
     }
 
+    // Apply zoom — all game content drawn in virtual coordinate space
+    ctx.save();
+    ctx.scale(this.ZOOM, this.ZOOM);
+
     const cx = this.camX, cy = this.camY;
+    const vW = this.vW;
 
     // Platforms
     for (const p of ld.platforms) {
       if (p.type === 'boundary') continue;
       const sx = p.x - cx, sy = p.y - cy;
-      if (sx + p.w < -50 || sx > W + 50) continue;
+      if (sx + p.w < -50 || sx > vW + 50) continue;
       ctx.save();
       ctx.fillStyle = C.COL_PLATFORM;
       ctx.strokeStyle = '#3a5070';
@@ -556,10 +563,10 @@ class Game {
       ctx.restore();
     }
 
-    // Floor visual (ground of world)
+    // Floor visual
     ctx.save();
     ctx.fillStyle = C.COL_GROUND;
-    ctx.fillRect(-cx, this.screenH - 24 - cy, ld.worldWidth, 24);
+    ctx.fillRect(-cx, this.vH - 24 - cy, ld.worldWidth, 24);
     ctx.restore();
 
     // Objects
@@ -587,8 +594,9 @@ class Game {
     // Player
     if (this.player) this.player.draw(ctx, cx, cy);
 
-    // Web aim indicator
+    // Web aim indicator (in virtual space — mouse converted to virtual coords)
     if (this.state === GSTATE.PLAYING && this.player && this.player.web.isNone) {
+      const vmx = this.mouseX / this.ZOOM, vmy = this.mouseY / this.ZOOM;
       ctx.save();
       ctx.globalAlpha = 0.25;
       ctx.strokeStyle = '#ffffff';
@@ -596,13 +604,16 @@ class Game {
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(this.player.cx - cx, this.player.cy - cy);
-      ctx.lineTo(this.mouseX, this.mouseY);
+      ctx.lineTo(vmx, vmy);
       ctx.stroke();
       ctx.setLineDash([]);
       ctx.restore();
     }
 
-    // Cross-hair on mouse
+    // End zoom transform
+    ctx.restore();
+
+    // Cross-hair on mouse (screen space — drawn after restore)
     if (this.state === GSTATE.PLAYING) {
       ctx.save();
       ctx.strokeStyle = 'rgba(255,255,255,0.7)';

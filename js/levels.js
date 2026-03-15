@@ -1,5 +1,25 @@
-// Level generator — all 30 levels matching Android original
+// Level generator — all 30 levels
 // Returns: { worldWidth, platforms, enemies, keys, gates, door, crates, lavas, weaponPickups }
+
+// Adds platforms spread across 4 height tiers so the full vertical range is traversable
+function addScaffoldPlatforms(ww, floorY) {
+  const extra = [];
+  // Four height fractions from ceiling down to just above floor-tier
+  const fracs = [0.08, 0.25, 0.44, 0.63];
+  for (let ti = 0; ti < fracs.length; ti++) {
+    const baseY = floorY * fracs[ti];
+    let x = 160;
+    while (x < ww - 160) {
+      // Deterministic jitter so layout is stable across reloads
+      const seed = Math.floor(x) + ti * 99991;
+      const pw = 140 + (seed * 37) % 120;
+      const yOff = ((seed * 53) % 200) - 100;
+      extra.push(new Platform(x, baseY + yOff, pw, 20));
+      x += 300 + (seed * 29) % 160;
+    }
+  }
+  return extra;
+}
 
 function buildLevel(levelNum, screenW, screenH) {
   const n = ((levelNum - 1) % 30) + 1;
@@ -32,7 +52,7 @@ function buildLevel(levelNum, screenW, screenH) {
   function enemy(x, lb, rb) { const e = new Enemy(x, floorY - 120, lb, rb); enemies.push(e); }
   function crawler(x, y, lb, rb) { const e = new CeilingCrawler(x, y, lb, rb); enemies.push(e); }
   function shooter(x, si) { const e = new ShooterEnemy(x, floorY - 100, si); enemies.push(e); }
-  function bat(x, lb, rb) { const b = new Bat(x, screenH * 0.35, lb, rb); enemies.push(b); }
+  function bat(x, lb, rb) { const b = new Bat(x, floorY * 0.4, lb, rb); enemies.push(b); }
   function jumpbot(x, lb, rb) { const j = new JumpingRobot(x, floorY - 90, lb, rb); enemies.push(j); }
   function pickup(x, y, type) { weaponPickups.push(new WeaponPickup(x - 18, y - 18, type)); }
   function key_(x, color) { keys.push(new Key(x, floorY - 200, color)); }
@@ -316,6 +336,9 @@ function buildLevel(levelNum, screenW, screenH) {
       gate_(2400, floorY-screenH*0.5, 30, screenH*0.5, 'red');
     } break;
   }
+
+  // Sprinkle platforms across the full vertical range of every level
+  platforms.push(...addScaffoldPlatforms(worldWidth, floorY));
 
   addBounds(worldWidth);
   const door = new Door(doorX, floorY - 90);

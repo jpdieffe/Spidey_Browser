@@ -569,6 +569,18 @@ class Game {
     ctx.fillRect(-cx, this.vH - 24 - cy, ld.worldWidth, 24);
     ctx.restore();
 
+    // Ceiling visual
+    ctx.save();
+    ctx.fillStyle = '#1a2a40';
+    ctx.fillRect(-cx, -cy, ld.worldWidth, 24);
+    ctx.strokeStyle = '#3a5070';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(-cx, 24 - cy);
+    ctx.lineTo(-cx + ld.worldWidth, 24 - cy);
+    ctx.stroke();
+    ctx.restore();
+
     // Objects
     for (const lv of ld.lavas) lv.draw(ctx, cx, cy);
     for (const g of ld.gates) g.draw(ctx, cx, cy);

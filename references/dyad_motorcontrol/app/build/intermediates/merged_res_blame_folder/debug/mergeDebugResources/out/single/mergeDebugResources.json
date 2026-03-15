@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.nirsense.webswinger.app-debug-20:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.nirsense.webswinger.app-main-22:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.nirsense.webswinger.app-debug-20:/drawable_spiderman_run.png.flat",
+        "source": "com.nirsense.webswinger.app-main-22:/drawable/spiderman_run.png"
+    },
+    {
+        "merged": "com.nirsense.webswinger.app-debug-20:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.nirsense.webswinger.app-main-22:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.nirsense.webswinger.app-debug-20:/drawable_spiderman.png.flat",
+        "source": "com.nirsense.webswinger.app-main-22:/drawable/spiderman.png"
+    }
+]

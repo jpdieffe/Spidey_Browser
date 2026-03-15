@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dark_blue">#1E1E5A</color>
+    <color name="night_sky">#18182A</color>
+    <color name="red_suit">#C81E1E</color>
+    <color name="white">#FFFFFF</color>
+    <string name="app_name">Web Swinger</string>
+    <style name="Theme.WebSwinger" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+    </style>
+</resources>

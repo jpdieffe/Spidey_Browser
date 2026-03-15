@@ -1,0 +1,12 @@
+R_DEF: Internal format may change without notice
+local
+color dark_blue
+color night_sky
+color red_suit
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable spiderman
+drawable spiderman_run
+string app_name
+style Theme.WebSwinger

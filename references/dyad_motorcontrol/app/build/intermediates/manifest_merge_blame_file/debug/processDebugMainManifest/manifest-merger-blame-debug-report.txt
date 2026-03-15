@@ -1,0 +1,85 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.nirsense.webswinger"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <permission
+11-->[androidx.core:core:1.12.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\34908ebe1076ae04d6a681caf932ea75\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+12        android:name="com.nirsense.webswinger.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+12-->[androidx.core:core:1.12.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\34908ebe1076ae04d6a681caf932ea75\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+13        android:protectionLevel="signature" />
+13-->[androidx.core:core:1.12.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\34908ebe1076ae04d6a681caf932ea75\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+14
+15    <uses-permission android:name="com.nirsense.webswinger.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+15-->[androidx.core:core:1.12.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\34908ebe1076ae04d6a681caf932ea75\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.12.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\34908ebe1076ae04d6a681caf932ea75\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+16
+17    <application
+17-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:4:5-22:19
+18        android:allowBackup="true"
+18-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:5:9-35
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.12.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\34908ebe1076ae04d6a681caf932ea75\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+20        android:debuggable="true"
+21        android:extractNativeLibs="false"
+22        android:icon="@drawable/ic_launcher_foreground"
+22-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:6:9-56
+23        android:label="@string/app_name"
+23-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:7:9-41
+24        android:supportsRtl="true"
+24-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:8:9-35
+25        android:theme="@style/Theme.WebSwinger" >
+25-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:9:9-48
+26        <activity
+26-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:11:9-21:20
+27            android:name="com.nirsense.webswinger.MainActivity"
+27-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:12:13-41
+28            android:configChanges="orientation|screenSize|keyboardHidden"
+28-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:15:13-74
+29            android:exported="true"
+29-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:13:13-36
+30            android:screenOrientation="landscape"
+30-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:14:13-50
+31            android:theme="@style/Theme.WebSwinger" >
+31-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:16:13-52
+32            <intent-filter>
+32-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:17:13-20:29
+33                <action android:name="android.intent.action.MAIN" />
+33-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:18:17-69
+33-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:18:25-66
+34
+35                <category android:name="android.intent.category.LAUNCHER" />
+35-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:19:17-77
+35-->G:\My Drive\nirsense_local\Android_Apps\dyad_motorcontrol\app\src\main\AndroidManifest.xml:19:27-74
+36            </intent-filter>
+37        </activity>
+38
+39        <provider
+39-->[androidx.emoji2:emoji2:1.2.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\f874f70f381f7add365f6c9fc71f77d0\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+40            android:name="androidx.startup.InitializationProvider"
+40-->[androidx.emoji2:emoji2:1.2.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\f874f70f381f7add365f6c9fc71f77d0\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+41            android:authorities="com.nirsense.webswinger.androidx-startup"
+41-->[androidx.emoji2:emoji2:1.2.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\f874f70f381f7add365f6c9fc71f77d0\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+42            android:exported="false" >
+42-->[androidx.emoji2:emoji2:1.2.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\f874f70f381f7add365f6c9fc71f77d0\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+43            <meta-data
+43-->[androidx.emoji2:emoji2:1.2.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\f874f70f381f7add365f6c9fc71f77d0\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+44                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+44-->[androidx.emoji2:emoji2:1.2.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\f874f70f381f7add365f6c9fc71f77d0\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+45                android:value="androidx.startup" />
+45-->[androidx.emoji2:emoji2:1.2.0] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\f874f70f381f7add365f6c9fc71f77d0\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+46            <meta-data
+46-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\a4aaa79b21713e8393bc9315587e18e2\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+47                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+47-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\a4aaa79b21713e8393bc9315587e18e2\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+48                android:value="androidx.startup" />
+48-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\JamesDieffenderfer\.gradle\caches\transforms-4\a4aaa79b21713e8393bc9315587e18e2\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+49        </provider>
+50    </application>
+51
+52</manifest>
